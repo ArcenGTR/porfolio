@@ -1,0 +1,17 @@
+---
+const { post, count } = Astro.props;
+const { title, thumbnail } = post.data;
+const isLarge = count % 3 === 0;
+---
+<article class={`relative overflow-hidden group rounded-xl bg-neutral-900 ${isLarge ? 'md:col-span-2 h-[600px]' : 'h-[400px]'}`}>
+  <a href={`/work/${post.slug}`} class="block w-full h-full">
+    {thumbnail && (
+      <img src={thumbnail} alt={title} class="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-700" />
+    )}
+    <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+      <h2 class="text-white text-4xl font-light uppercase tracking-tight text-center px-4">
+        {title}
+      </h2>
+    </div>
+  </a>
+</article>

@@ -1,0 +1,19 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PostCard from '../components/PostCard.astro';
+import { getCollection } from 'astro:content';
+
+const works = await getCollection('work');
+---
+
+<Layout title="My Portfolio">
+  <section class="pt-32 pb-20 px-6">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {works.map((post: any, index: any) => (
+          <PostCard post={post} count={index} />
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>
