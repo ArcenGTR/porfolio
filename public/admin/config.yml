@@ -2,18 +2,60 @@ backend:
   name: git-gateway
   branch: main
 
-media_folder: "public/images"
-public_folder: "/images"
+media_folder: "public/uploads"
+public_folder: "/uploads"
 local_backend: true
 
 collections:
-  - name: "work"
-    label: "Works"
-    folder: "src/content/work"
+  - name: "experience"
+    label: "Experience"
+    folder: "src/content/experience"
     create: true
-    slug: "{{slug}}"
+    slug: "{{year}}-{{month}}-{{title}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string", hint: "Например: Frontend Developer или Volunteer" }
+      - { label: "Organization", name: "organization", widget: "string", hint: "Например: Google или Red Cross" }
+      - { label: "Timeframe", name: "timeframe", widget: "string", hint: "Например: Dec 2016 — Present" }
+      - { label: "Description", name: "description", widget: "text", required: false }
+      - { label: "Tags", name: "tags", widget: "list", hint: "Навыки (Photoshop, Soft Skills)" }
+  - name: "project"
+    label: "Projects"
+    folder: "src/content/project"
+    create: true
     fields:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Thumbnail", name: "thumbnail", widget: "image" }
       - { label: "Publish Date", name: "date", widget: "datetime" }
       - { label: "Body", name: "body", widget: "markdown" }
+  - name: "settings"
+    label: "Settings"
+    delete: false
+    editor:
+      preview: false
+    files:
+      - name: "home"
+        label: "Home Page Content"
+        file: "src/content/settings/home.json"
+        fields:
+          - label: "Hero Section"
+            name: "hero"
+            widget: "object"
+            fields:
+              - { label: "Main Title", name: "title", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+              - { label: "CV File", name: "cv", widget: "file", required: false }
+              - label: "Social Links"
+                name: "socials"
+                widget: "list"
+                fields:
+                  - { label: "Label", name: "label", widget: "string" }
+                  - { label: "URL", name: "url", widget: "string" }
+          - label: "About Section"
+            name: "about"
+            widget: "object"
+            fields:
+              - { label: "About Text", name: "text", widget: "markdown" }
+              - { label: "About Image", name: "image", widget: "image" }
+              - { label: "Email", name: "email", widget: "string" }
+              - { label: "Phone", name: "phone", widget: "string" }
+  

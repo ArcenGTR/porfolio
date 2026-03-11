@@ -1,24 +1,12 @@
 ---
-export interface Props { title?: string; }
-const { title } = Astro.props;
 ---
-<header class="fixed top-0 w-full z-50 bg-white dark:bg-neutral-900 transition-colors duration-300 border-b border-transparent">
+<header class="fixed top-0 w-full z-50 bg-white/70 backdrop-blur-md transition-colors duration-300 border-b border-transparent">
   <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
     <nav class="hidden md:flex gap-8 uppercase text-xs tracking-widest font-medium">
-      <a href="/" class="hover:opacity-60">Home</a>
-      <a href="/work" class="hover:opacity-60">Work</a>
-      <a href="/about" class="hover:opacity-60">About</a>
+      <a href="#" class="hover:opacity-60">Home</a>
+      <a href="#expirience" class="hover:opacity-60">Expirience</a>
+      <a href="#project" class="hover:opacity-60">Projects</a>
+      <a href="#about" class="hover:opacity-60">About</a>
     </nav>
-
-    <div class="absolute left-1/2 -translate-x-1/2">
-      <a href="/" class="text-2xl font-bold tracking-tighter uppercase">{title || "CLAY"}</a>
-    </div>
-
-    <div class="flex items-center gap-4">
-      <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-neutral-800">
-        <svg class="sun-icon hidden dark:block" ...>...</svg>
-        <svg class="moon-icon block dark:hidden" ...>...</svg>
-      </button>
-    </div>
   </div>
 </header>

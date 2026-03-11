@@ -1,0 +1,19 @@
+{
+  "hero": {
+    "title": "Hello I'm Eva",
+    "description": "Designer form Kraków",
+    "socials": [
+      {
+        "label": "Instagram",
+        "url": "https://www.instagram.com/reel/DVwApOEiHfo/?utm_source=ig_web_copy_link&igsh=NTc4MTIwNjQ2YQ=="
+      }
+    ],
+    "cv": "/uploads/illia-kuziv-resume.pdf"
+  },
+  "about": {
+    "text": "Design, sculpture...",
+    "image": "/uploads/footer_img.jpg",
+    "email": "yk@example.com",
+    "phone": "(+48) 123 456 789"
+  }
+}

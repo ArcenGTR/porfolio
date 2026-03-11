@@ -1,19 +1,126 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import PostCard from '../components/PostCard.astro';
-import { getCollection } from 'astro:content';
+import { getCollection, getEntry } from 'astro:content';
 
-const works = await getCollection('work');
+const homeData = await getEntry('settings', 'home');
+const { hero, about } = homeData!.data;
+const experience = await getCollection('experience');
+const projects = await getCollection('project');
 ---
 
-<Layout title="My Portfolio">
-  <section class="pt-32 pb-20 px-6">
-    <div class="max-w-7xl mx-auto">
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {works.map((post: any, index: any) => (
-          <PostCard post={post} count={index} />
+<Layout title="Eva Kurysheva">
+  <div class="max-w-6xl mx-auto px-6">
+
+    <section id="hero" class="min-h-screen flex flex-col justify-center pt-20">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        <div>
+          <h1 class="text-7xl md:text-9xl font-bold leading-tight text-neutral-800  mb-8">
+            { hero.title }
+          </h1>
+          {hero.cv && (
+            <a 
+              href={hero.cv} 
+              target="_blank" 
+              class="inline-block bg-pink-100 hover:bg-pink-200 text-neutral-800 px-8 py-4 rounded-sm tracking-widest uppercase text-sm transition-colors"
+            >
+              Download CV
+            </a>
+          )}
+        </div>
+        <div class="text-neutral-500  leading-relaxed text-lg max-w-md ml-auto">
+          <p class="mb-6">
+            { hero.description }
+          </p>
+          <div class="flex gap-6 uppercase text-xs tracking-widest font-bold text-neutral-800 ">
+            { hero.socials.map(link => (
+              <a href={ link.url } class="hover:underline">{ link.label }</a>
+            )) }
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="expirience" class="py-32">
+      <h2 class="text-6xl font-bold mb-16 opacity-80">Expirience</h2>
+      <div class="space-y-12">
+        {experience.map((item) => (
+          <div class="grid grid-cols-1 md:grid-cols-2 border-t border-neutral-100 pt-8 group">
+            <div>
+              <h3 class="text-2xl font-bold group-hover:text-pink-400 transition-colors">
+                {item.data.title}
+              </h3>
+              <p class="text-neutral-400 font-medium">{item.data.organization}</p>
+              <p class="text-xs uppercase tracking-widest opacity-40 mt-2">
+                {item.data.timeframe}
+              </p>
+            </div>
+            <div class="flex flex-col justify-between">
+              <p class="text-neutral-500 mb-4 whitespace-pre-line">
+                { item?.data.description || "" }
+              </p>
+              {item.data.tags && (
+                <div class="flex flex-wrap gap-2">
+                  {item.data.tags.map(tag => (
+                    <span class="text-[10px] px-2 py-1 bg-neutral-100 rounded uppercase font-bold tracking-tighter">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
         ))}
       </div>
-    </div>
-  </section>
+    </section>
+
+    <section id="project" class="py-32">
+      <h2 class="text-6xl font-bold mb-16 opacity-80">Projects</h2>
+      <div class="space-y-32">
+        {projects.map((item, index) => (
+          <div class={`flex flex-col ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} items-center gap-12`}>
+            <div class="w-full md:w-1/2 overflow-hidden rounded-sm bg-neutral-100 aspect-square">
+              <img src={item.data.thumbnail} alt={item.data.title} class="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
+            </div>
+            <div class="w-full md:w-1/2 p-8">
+              <h3 class="text-4xl font-bold mb-6">{item.data.title}</h3>
+              <p class="text-neutral-500 leading-relaxed max-w-sm">
+                It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section id="about" class="py-32 border-t border-neutral-100">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-20">
+        <div>
+          <h2 class="text-6xl font-bold mb-8">About</h2>
+          <p class="text-neutral-500 leading-relaxed mb-8">
+            { about.text }
+          </p>
+          <img src={ about.image } class="w-full grayscale hover:grayscale-0 transition-all duration-500 rounded-sm" />
+        </div>
+        <div class="flex flex-col justify-end pb-12">
+           <div class="bg-pink-50 p-12 space-y-6">
+              <div>
+                <p class="text-[10px] uppercase tracking-widest opacity-50 mb-1">Email</p>
+                <p class="font-bold">{ about.email }</p>
+              </div>
+              <div>
+                <p class="text-[10px] uppercase tracking-widest opacity-50 mb-1">Phone</p>
+                <p class="font-bold">{ about.phone }</p>
+              </div>
+           </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
 </Layout>
+
+<style>
+  html {
+    scroll-behavior: smooth;
+  }
+</style>
