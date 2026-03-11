@@ -79,12 +79,12 @@ const projects = await getCollection('project');
         {projects.map((item, index) => (
           <div class={`flex flex-col ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} items-center gap-12`}>
             <div class="w-full md:w-1/2 overflow-hidden rounded-sm bg-neutral-100 aspect-square">
-              <img src={item.data.thumbnail} alt={item.data.title} class="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
+              <img src={ item.data.thumbnail } alt={ item.data.title } class="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
             </div>
             <div class="w-full md:w-1/2 p-8">
-              <h3 class="text-4xl font-bold mb-6">{item.data.title}</h3>
+              <h3 class="text-4xl font-bold mb-6">{ item.data.title }</h3>
               <p class="text-neutral-500 leading-relaxed max-w-sm">
-                It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.
+                { item.data.description }
               </p>
             </div>
           </div>

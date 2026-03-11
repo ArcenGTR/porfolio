@@ -7,7 +7,6 @@ const project = defineCollection({
     title: z.string(),
     description: z.string().optional(),
     thumbnail: z.string().optional(),
-    date: z.coerce.date().optional(),
   }),
 });
 
